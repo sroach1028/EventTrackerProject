@@ -10,7 +10,7 @@
 
 <!-- class definitions  -->
 
-<class> com.skilldistillery.eventtracker.entities.extinction</class>
+<class> com.skilldistillery.eventtracker.entities.Extinction</class>
 
 
     <properties>
