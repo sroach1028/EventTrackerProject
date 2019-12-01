@@ -23,10 +23,10 @@ DROP TABLE IF EXISTS `extinction` ;
 CREATE TABLE IF NOT EXISTS `extinction` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NULL,
-  `animal_class` VARCHAR(45) NULL,
-  `year` VARCHAR(45) NULL,
-  `era` VARCHAR(45) NULL,
-  `range` VARCHAR(100) NULL,
+  `animal_class` VARCHAR(100) NULL,
+  `year` VARCHAR(100) NULL,
+  `era` VARCHAR(100) NULL,
+  `area` VARCHAR(100) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -47,9 +47,9 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `eventtracker`;
-INSERT INTO `extinction` (`id`, `name`, `animal_class`, `year`, `era`, `range`) VALUES (1, 'American Mastadon', 'Mammal', '8,500', NULL, 'North America');
-INSERT INTO `extinction` (`id`, `name`, `animal_class`, `year`, `era`, `range`) VALUES (2, 'Bermuda Hawk', 'Bird', '1603', NULL, 'Bermuda');
-INSERT INTO `extinction` (`id`, `name`, `animal_class`, `year`, `era`, `range`) VALUES (3, 'Golden Toad', 'Amphibian', '1989', NULL, 'Costa Rica');
+INSERT INTO `extinction` (`id`, `name`, `animal_class`, `year`, `era`, `area`) VALUES (1, 'American Mastadon', 'Mammal', '8,500', 'BC', 'North America');
+INSERT INTO `extinction` (`id`, `name`, `animal_class`, `year`, `era`, `area`) VALUES (2, 'Bermuda Hawk', 'Bird', '1603', 'BC', 'Bermuda');
+INSERT INTO `extinction` (`id`, `name`, `animal_class`, `year`, `era`, `area`) VALUES (3, 'Golden Toad', 'Amphibian', '1989', 'AD', 'Costa Rica');
 
 COMMIT;
 

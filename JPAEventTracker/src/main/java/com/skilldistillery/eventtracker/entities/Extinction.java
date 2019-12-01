@@ -22,11 +22,23 @@ public class Extinction {
 
 	private String era;
 
-	private String range;
+	private String area;
 
 	public int getId() {
 		return id;
 	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
 
 	public String getName() {
 		return name;
@@ -60,18 +72,10 @@ public class Extinction {
 		this.era = era;
 	}
 
-	public String getRange() {
-		return range;
-	}
-
-	public void setRange(String range) {
-		this.range = range;
-	}
-
 	@Override
 	public String toString() {
 		return "Extinction [id=" + id + ", name=" + name + ", animalClass=" + animalClass + ", year=" + year + ", era="
-				+ era + ", range=" + range + "]";
+				+ era + ", range=" + area + "]";
 	}
 
 	public Extinction() {

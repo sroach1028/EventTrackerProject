@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,17 +48,34 @@ public class ExtinctionController {
 		return extinction;
 	}
 	@DeleteMapping("extinctions/{id}")
-	public boolean deleteById(@PathVariable Integer id, HttpServletRequest req, HttpServletResponse resp) {
+	public void deleteById(@PathVariable Integer id, HttpServletRequest req, HttpServletResponse resp) {
 		boolean deleted = false;
 		try {
 			deleted = svc.deleteById(id);
 			if (deleted == true)
 			resp.setStatus(200);
+			else
+				resp.setStatus(404);
 		} catch (Exception e) {
 			e.printStackTrace();
 			resp.setStatus(400);
-			
 		}
-		return deleted;
+	}
+	@PutMapping("extinctions/{id}")
+	public Extinction updateById(@RequestBody Extinction extinction, @PathVariable Integer id, HttpServletRequest req, HttpServletResponse resp) {
+		try {
+			extinction = svc.updateById(extinction, id);
+			if (extinction == null) {
+				resp.setStatus(404);
+			}
+			else
+			resp.setStatus(200);
+			return extinction;
+		} catch (Exception e) {
+			e.printStackTrace();
+			resp.setStatus(400);
+			return null;
+		}
+		
 	}
 }

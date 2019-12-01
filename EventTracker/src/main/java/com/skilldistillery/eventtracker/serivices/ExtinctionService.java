@@ -8,4 +8,6 @@ public interface ExtinctionService {
 
 	Extinction addExtinction(Extinction extinction);
 	boolean deleteById(int it);
+
+	Extinction updateById(Extinction extinction, Integer id);
 }

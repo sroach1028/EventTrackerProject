@@ -29,18 +29,33 @@ public class ExtinctionServiceImpl implements ExtinctionService {
 	
 	@Override
 	public Extinction addExtinction(Extinction extinction) {
-		Extinction ext1 = new Extinction();
-		ext1.setName("Mastadon");
-		repo.saveAndFlush(ext1);
-		return ext1;
+		return repo.saveAndFlush(extinction);
 	}
 
 	@Override
 	public boolean deleteById(int id) {
-		repo.deleteById(id);
-		if (repo.existsById(id)) {
-			return false;
+		Optional<Extinction> opt = repo.findById(id);
+		if (opt.isPresent()) {
+			repo.deleteById(id);
+			return true;
 		}
-		return true;
+		else
+			return false;
+	}
+
+	@Override
+	public Extinction updateById(Extinction extinction, Integer id) {
+		Optional<Extinction> opt = repo.findById(id);
+		if (opt.isPresent()) {
+			Extinction ext = opt.get();
+			ext.setAnimalClass(extinction.getAnimalClass());
+			ext.setName(extinction.getName());
+			ext.setYear(extinction.getYear());
+			ext.setArea(extinction.getArea());
+			ext.setEra(extinction.getEra());
+			repo.save(ext);
+			return ext;
+		}
+		return null;
 	}
 }
