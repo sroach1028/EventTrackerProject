@@ -1,0 +1,63 @@
+package com.skilldistillery.eventtracker.controllers;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.skilldistillery.eventtracker.entities.Extinction;
+import com.skilldistillery.eventtracker.serivices.ExtinctionService;
+
+@RestController
+@RequestMapping("api")
+public class ExtinctionController {
+
+	@Autowired
+	private ExtinctionService svc;
+	
+	@GetMapping("extinctions/{id}")
+	public Extinction findById(@PathVariable Integer id, HttpServletResponse resp) {
+		Extinction ext = svc.findById(id);
+		if(ext == null) {
+			resp.setStatus(404);
+		}
+		return ext;
+	}
+	
+	@PostMapping("extinctions")
+	public Extinction addExtinction(@RequestBody Extinction extinction, HttpServletRequest req, HttpServletResponse resp) {
+		try {
+			extinction = svc.addExtinction(extinction);
+			resp.setStatus(201);
+			StringBuffer url = req.getRequestURL();
+			url.append("/").append(extinction.getId());
+			resp.addHeader("Location", url.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			resp.setStatus(400);
+			return null;
+		}
+		return extinction;
+	}
+	@DeleteMapping("extinctions/{id}")
+	public boolean deleteById(@PathVariable Integer id, HttpServletRequest req, HttpServletResponse resp) {
+		boolean deleted = false;
+		try {
+			deleted = svc.deleteById(id);
+			if (deleted == true)
+			resp.setStatus(200);
+		} catch (Exception e) {
+			e.printStackTrace();
+			resp.setStatus(400);
+			
+		}
+		return deleted;
+	}
+}

@@ -43,7 +43,6 @@ class ExtinctionTest {
 	@Test
 	void test() {
 		assertEquals("Mammal", extinction.getAnimalClass());
-		assertEquals("BC", extinction.getEra().name());
 	}
 
 }
