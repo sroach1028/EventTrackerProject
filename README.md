@@ -7,7 +7,7 @@ A Spring REST program created by Shaun Roach at Skill Distillery, CO
 This program uses RESTful web services that allow clients to retrieve and manage 'extinction' data stored on a server. The program communicates with a MySQL database that contains data related to known animal extinctions. The clients communicate via URI routes and Http Methods making up the following REST Endpoints:
 
 * GET api/extinctions/{id}        
--------find and display the Extinction even corresponding to the given id
+-------find and display the Extinction event corresponding to the given id
 * POST api/extinctions            
 -------create and persist an Extinction event from a given JSON representation
 * PUT api/extinctions/{id}        
