@@ -4,10 +4,14 @@
 
 This program uses RESTful web services that allow clients to retrieve and manage 'extinction' data stored on a server. The clients communicate via URI routes and Http Methods making up the following REST Endpoints:
 
-* GET api/extinctions/{id}        find and display the Extinction even corresponding to the given id
-* POST api/extinctions            create and persist an Extinction event from a given JSON representation
-* PUT api/extinctions/{id}        update the Extinction event corresponding to the given id with a provided JSON representation
-* DELETE api/extinctions/{id}     delete Extinction even corresponding to the given id
+* GET api/extinctions/{id}        
+-------find and display the Extinction even corresponding to the given id
+* POST api/extinctions            
+-------create and persist an Extinction event from a given JSON representation
+* PUT api/extinctions/{id}        
+-------update the Extinction event corresponding to the given id with a provided JSON representation
+* DELETE api/extinctions/{id}     
+-------delete Extinction even corresponding to the given id
 
 ## Technologies
 
