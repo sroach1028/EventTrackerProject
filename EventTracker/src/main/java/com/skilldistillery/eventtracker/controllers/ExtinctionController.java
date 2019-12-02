@@ -1,5 +1,7 @@
 package com.skilldistillery.eventtracker.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,6 +32,33 @@ public class ExtinctionController {
 			resp.setStatus(404);
 		}
 		return ext;
+	}
+	
+	@GetMapping("extinctions")
+	public List<Extinction> findAll(HttpServletResponse resp) {
+		List<Extinction> extList = svc.findAll();
+		if (extList.isEmpty()) {
+			resp.setStatus(404);
+		}
+		return extList;
+	}
+	
+//	@GetMapping("extinctions/search/{name}")
+//	public Extinction findByName(@PathVariable String name, HttpServletResponse resp) {
+//		Extinction ext = svc.findByName(name);
+//		if (ext == null) {
+//			resp.setStatus(404);
+//		}
+//		return ext;
+//	}
+	
+	@GetMapping("extinctions/search/{keyword}")
+	public List<Extinction> findByKeyword(@PathVariable String keyword, HttpServletResponse resp) {
+		List<Extinction> extList = svc.findByKeyword(keyword);
+		if (extList.isEmpty()) {
+			resp.setStatus(404);
+		}
+		return extList;
 	}
 	
 	@PostMapping("extinctions")

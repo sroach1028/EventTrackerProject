@@ -1,5 +1,6 @@
 package com.skilldistillery.eventtracker.serivices;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,9 +54,25 @@ public class ExtinctionServiceImpl implements ExtinctionService {
 			ext.setYear(extinction.getYear());
 			ext.setArea(extinction.getArea());
 			ext.setEra(extinction.getEra());
-			repo.save(ext);
+			repo.saveAndFlush(ext);
 			return ext;
 		}
 		return null;
+	}
+
+	@Override
+	public List<Extinction> findAll() {
+		return repo.findAll();
+	}
+
+	@Override
+	public Extinction findByName(String name) {
+		return repo.findByName(name);
+	}
+	
+	@Override 
+	public List<Extinction> findByKeyword(String keyword){
+		keyword = "%"+keyword+"%";
+		return repo.findByNameLikeOrAreaLike(keyword, keyword);
 	}
 }
