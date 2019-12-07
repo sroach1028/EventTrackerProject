@@ -3,7 +3,12 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
 }
-
+	apply plugin: 'war'
+	war {
+  enabled = true
+  archiveName = "${baseName}.war"     // Our app name, as defined in settings.gradle
+  destinationDir = file("./")         // Project root directory
+}
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
@@ -20,6 +25,7 @@ compile project(':JPAEventTracker')
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+	implementation ('org.springframework.boot:spring-boot-starter-tomcat')
 }
 
 test {
