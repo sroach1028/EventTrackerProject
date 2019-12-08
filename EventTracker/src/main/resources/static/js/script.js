@@ -97,6 +97,7 @@ function displayAllExt(extinctions){
 	let head3 = document.createElement('th');
 	let head4 = document.createElement('th');
 	let head5 = document.createElement('th');
+	
 	table.appendChild(headerRow);
 	headerRow.appendChild(head1);
 	headerRow.appendChild(head2);
@@ -129,6 +130,14 @@ function displayAllExt(extinctions){
 		year.textContent = extinctions[i].year;
 		era.textContent = extinctions[i].era;
 		area.textContent = extinctions[i].area;
+		
+		row.addEventListener('click', function(event) {
+		    event.preventDefault();
+		    var extId = extinctions[i].id;
+		    if (!isNaN(extId) && extId > 0) {
+		      getExt(extId);
+		    }
+		  })
 	}
 
 }
