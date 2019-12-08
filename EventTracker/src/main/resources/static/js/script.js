@@ -63,9 +63,16 @@ function displayExt(extinction) {
 	  let year = document.createElement('li');
 	  let era = document.createElement('li');
 	  let area = document.createElement('li');
+	  
+	  let editButton = document.createElement('button');
+	  editButton.innerText = "Edit";
+	  let deleteButton = document.createElement('button');
+	  deleteButton.innerText = "DELETE";
+	  
 	  dataDiv.appendChild(h1);
 	  dataDiv.appendChild(block);
 	  dataDiv.appendChild(list);
+	  
 	  list.appendChild(animalClass);
 	  list.appendChild(year);
 	  list.appendChild(era);
@@ -80,7 +87,42 @@ function displayExt(extinction) {
 			era.textContent = extinction.era;
 			area.textContent = extinction.area;
 		}
+		
+		dataDiv.appendChild(editButton);
+		dataDiv.appendChild(deleteButton);
+		editButton.addEventListener('click', function(event) {
+		    event.preventDefault();
+		    var extId = extinction.id;
+		    if (!isNaN(extId) && extId > 0) {
+		      editExtinction(extinction);
+		    }
+		  })
+		  
+		  deleteButton.addEventListener('click', function(event) {
+			  event.preventDefault();
+			  var extId = extinction.id;
+			  if (!isNaN(extId) && extId > 0) {
+				  deleteExtinction(extId);
+			  }
+		  })
 	}
+
+function deleteExtinction(extId){
+	   var xhr = new XMLHttpRequest();
+	   xhr.open('DELETE', 'http://localhost:8084/api/extinctions/' + extId, true);
+	   xhr.onreadystatechange = function() {
+		      if (xhr.readyState === 4 && xhr.status < 400) {
+//		         var extinctions = JSON.parse(xhr.responseText);
+		         getAllExt();
+		      }
+		      if (xhr.readyState === 4 && xhr.status >= 400) {
+		         console.error(xhr.status + ': ' + xhr.responseText);
+//		         displayExt(null);
+		      }
+		   };
+		   xhr.send(null);
+}
+
 function displayAllExt(extinctions){
 	var dataDiv = document.getElementById('extData');
 	dataDiv.textContent = '';
@@ -168,4 +210,54 @@ var newExtObject = {
 
 var newFilmJsonString = JSON.stringify(newExtObject);
 xhr.send(newFilmJsonString);
+}
+
+function editExtinction(extinction){
+	let dataDiv = document.getElementById('extData');
+	let editForm = document.createElement('form');
+	dataDiv.appendChild(editForm);
+	for (const property in extinction){
+		let input = document.createElement('input');
+		input.setAttribute("type", "text");
+		input.setAttribute("name", `${property}`)
+		input.setAttribute("value", `${extinction[property]}`);
+		console.log(`${property}`)
+		editForm.appendChild(input);
+	}
+	editForm.id.setAttribute("readonly", "readonly");
+	let submitUpdate = document.createElement('button');
+	submitUpdate.innerText = "UPDATE";
+	editForm.appendChild(submitUpdate);
+	submitUpdate.addEventListener('click', function(event) {
+			 event.preventDefault();
+			 submitEdits();
+		  });
+	
+	function submitEdits(){ 
+	var xhr = new XMLHttpRequest();
+	xhr.open('PUT', 'http://localhost:8084/api/extinctions/' + extinction.id, true);
+	xhr.setRequestHeader("Content-type", "application/json");
+	
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4 && xhr.status < 400) {
+			var extinction = JSON.parse(xhr.responseText);
+			getAllExt();
+		}
+		if (xhr.readyState === 4 && xhr.status >= 400) {
+			console.error(xhr.status + ': ' + xhr.responseText);
+//		         displayExt(null);
+		}
+	};
+	
+	var newExtObject = {
+			name: editForm.name.value,
+			animalClass: editForm.animalClass.value,
+			year: editForm.year.value,
+			era: editForm.era.value,
+			area: editForm.area.value
+	};
+	console.log(newExtObject);
+	var newFilmJsonString = JSON.stringify(newExtObject);
+	xhr.send(newFilmJsonString);
+	}
 }
