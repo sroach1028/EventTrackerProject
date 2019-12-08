@@ -2,16 +2,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Animal Extinctions</title>
 <script type="text/javascript" src = "js/script.js">
 </script>
 </head>
 <body>
-<h1>Event Tracker</h1>
+<h1>Event Tracker</h1><br>
+<h3>Search All Extinctions</h3>
+<form name = searchAll>
+<button name = "searchAll">Show All Extinctions</button>
+</form>
+<h3>Id Search</h3>
 	<form name = extForm>
 		<input type = "number" name = "extId"/>
 		<button name = "lookup">Lookup Extinction By Id</button>
+	</form><br>
+	<h3>Add Animal Extinction</h3>
+	<form name = createForm>
+	<input type = "text" name = "name" placeholder = "Animal Name"/>
+	<input type = "text" name = "animalClass" placeholder = "Class"/>
+	<input type = "text" name = "year" placeholder = "Year Extinct"/>
+	<input type = "text" name = "era" placeholder = "Era (BC/AD)"/>
+	<input type = "text" name = "area" placeholder = "Area/Range"/>
+	<button name = "create">Create</button>
 	</form>
+	
 	
 	<div id="output">
 		<div id="extData"></div>

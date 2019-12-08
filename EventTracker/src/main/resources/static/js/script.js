@@ -11,10 +11,14 @@ function init() {
 	      getExt(extId);
 	    }
 	  })
-	document.addExtForm.create.addEventListener('click', function(event) {
+	document.createForm.create.addEventListener('click', function(event) {
 		event.preventDefault();
-		addNewExt();
+		addNewExtinction();
 	});
+	  document.searchAll.searchAll.addEventListener('click', function(event) {
+		 event.preventDefault(); 
+		 getAllExt();
+	  });
 	}
 
 function getExt(extId) {
@@ -27,10 +31,26 @@ function getExt(extId) {
 	      }
 	      if (xhr.readyState === 4 && xhr.status >= 400) {
 	         console.error(xhr.status + ': ' + xhr.responseText);
-	         displayExt(null);
+//	         displayExt(null);
 	      }
 	   };
 	   xhr.send(null);
+}
+
+function getAllExt(){
+	   var xhr = new XMLHttpRequest();
+	   xhr.open('GET', 'http://localhost:8084/api/extinctions/', true);
+	   xhr.onreadystatechange = function() {
+		      if (xhr.readyState === 4 && xhr.status < 400) {
+		         var extinctions = JSON.parse(xhr.responseText);
+		         displayAllExt(extinctions);
+		      }
+		      if (xhr.readyState === 4 && xhr.status >= 400) {
+		         console.error(xhr.status + ': ' + xhr.responseText);
+//		         displayExt(null);
+		      }
+		   };
+		   xhr.send(null);
 }
 
 function displayExt(extinction) {
@@ -55,10 +75,88 @@ function displayExt(extinction) {
 		}
 		else {
 			h1.textContent = extinction.name;
-			block.textContent = extinction.description;
 			animalClass.textContent = extinction.animalClass;
 			year.textContent = extinction.year;
 			era.textContent = extinction.era;
 			area.textContent = extinction.area;
 		}
 	}
+function displayAllExt(extinctions){
+	var dataDiv = document.getElementById('extData');
+	dataDiv.textContent = '';
+	
+	let h1 = document.createElement('h1');
+	h1.textContent = 'All Extinctions';
+	dataDiv.appendChild(h1);
+	
+	let table = document.createElement('table');
+	dataDiv.appendChild(table);
+	let headerRow = document.createElement('tr');
+	let head1 = document.createElement('th');
+	let head2 = document.createElement('th');
+	let head3 = document.createElement('th');
+	let head4 = document.createElement('th');
+	let head5 = document.createElement('th');
+	table.appendChild(headerRow);
+	headerRow.appendChild(head1);
+	headerRow.appendChild(head2);
+	headerRow.appendChild(head3);
+	headerRow.appendChild(head4);
+	headerRow.appendChild(head5);
+	head1.textContent = "Name";
+	head2.textContent = "Class";
+	head3.textContent = "Year";
+	head4.textContent = "Era";
+	head5.textContent = "Area";
+	
+	for(let i = 0; i<extinctions.length; i++){
+		let row = document.createElement('tr');
+		table.appendChild(row);
+		let name = document.createElement('td');
+		let animalClass = document.createElement('td');
+		let year = document.createElement('td');
+		let era = document.createElement('td');
+		let area = document.createElement('td');
+		
+		row.appendChild(name);
+		row.appendChild(animalClass);
+		row.appendChild(year);
+		row.appendChild(era);
+		row.appendChild(area);
+		
+		name.textContent = extinctions[i].name;
+		animalClass.textContent = extinctions[i].animalClass;
+		year.textContent = extinctions[i].year;
+		era.textContent = extinctions[i].era;
+		area.textContent = extinctions[i].area;
+	}
+
+}
+function addNewExtinction(){
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', 'http://localhost:8084/api/extinctions/', true);
+	xhr.setRequestHeader("Content-type", "application/json");
+	
+	xhr.onreadystatechange = function() {
+		      if (xhr.readyState === 4 && xhr.status < 400) {
+		         var extinction = JSON.parse(xhr.responseText);
+		         getAllExt();
+		      }
+		      if (xhr.readyState === 4 && xhr.status >= 400) {
+		         console.error(xhr.status + ': ' + xhr.responseText);
+//		         displayExt(null);
+		      }
+		   };
+	
+let form = document.createForm;
+var newExtObject = {
+	name: form.name.value,
+	animalClass: form.animalClass.value,
+	year: form.year.value,
+	era: form.era.value,
+	area: form.area.value
+};
+
+var newFilmJsonString = JSON.stringify(newExtObject);
+xhr.send(newFilmJsonString);
+}
