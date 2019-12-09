@@ -23,7 +23,7 @@ function init() {
 
 function getExt(extId) {
 	   var xhr = new XMLHttpRequest();
-	   xhr.open('GET', 'http://localhost:8084/api/extinctions/' + extId, true);
+	   xhr.open('GET', 'api/extinctions/' + extId, true);
 	   xhr.onreadystatechange = function() {
 	      if (xhr.readyState === 4 && xhr.status < 400) {
 	         var extinction = JSON.parse(xhr.responseText);
@@ -39,7 +39,7 @@ function getExt(extId) {
 
 function getAllExt(){
 	   var xhr = new XMLHttpRequest();
-	   xhr.open('GET', 'http://localhost:8084/api/extinctions/', true);
+	   xhr.open('GET', 'api/extinctions/', true);
 	   xhr.onreadystatechange = function() {
 		      if (xhr.readyState === 4 && xhr.status < 400) {
 		         var extinctions = JSON.parse(xhr.responseText);
@@ -113,7 +113,7 @@ function displayExt(extinction) {
 
 function deleteExtinction(extId){
 	   var xhr = new XMLHttpRequest();
-	   xhr.open('DELETE', 'http://localhost:8084/api/extinctions/' + extId, true);
+	   xhr.open('DELETE', 'api/extinctions/' + extId, true);
 	   xhr.onreadystatechange = function() {
 		      if (xhr.readyState === 4 && xhr.status < 400) {
 //		         var extinctions = JSON.parse(xhr.responseText);
@@ -194,10 +194,9 @@ function displayAllExt(extinctions){
 	function getClassAvg(className){
 		let h4 = document.createElement('h4');
 		dataDiv.appendChild(h4);
-		h4.textContent = "Can't get there";
 		
 		var xhr = new XMLHttpRequest();
-		xhr.open('GET', 'http://localhost:8084/api/extinctions/avg/' + className, true);
+		xhr.open('GET', 'api/extinctions/avg/' + className, true);
 		xhr.setRequestHeader("Content-type", "application/json");
 		xhr.onreadystatechange = function() {
 		      if (xhr.readyState === 4 && xhr.status < 400) {
@@ -206,7 +205,7 @@ function displayAllExt(extinctions){
 		      }
 		      if (xhr.readyState === 4 && xhr.status >= 400) {
 		         console.error(xhr.status + ': ' + xhr.responseText);
-		         h4.textContent = "No " + className + "'s Stored";
+		         h4.textContent = "No " + className + "s Stored";
 		      }
 		   };
 		   xhr.send(null);
@@ -216,18 +215,20 @@ function displayAllExt(extinctions){
 
 function addNewExtinction(){
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'http://localhost:8084/api/extinctions/', true);
+	xhr.open('POST', 'api/extinctions/', true);
 	xhr.setRequestHeader("Content-type", "application/json");
 	
 	xhr.onreadystatechange = function() {
 		      if (xhr.readyState === 4 && xhr.status < 400) {
 		         var extinction = JSON.parse(xhr.responseText);
+		         form.reset();
 		         getAllExt();
 		      }
 		      if (xhr.readyState === 4 && xhr.status >= 400) {
 		         console.error(xhr.status + ': ' + xhr.responseText);
 //		         displayExt(null);
 		      }
+
 		   };
 	
 let form = document.createForm;
@@ -240,6 +241,7 @@ var newExtObject = {
 };
 
 var newFilmJsonString = JSON.stringify(newExtObject);
+
 xhr.send(newFilmJsonString);
 }
 
@@ -252,7 +254,6 @@ function editExtinction(extinction){
 		input.setAttribute("type", "text");
 		input.setAttribute("name", `${property}`)
 		input.setAttribute("value", `${extinction[property]}`);
-		console.log(`${property}`)
 		editForm.appendChild(input);
 	}
 	editForm.id.setAttribute("readonly", "readonly");
@@ -266,7 +267,7 @@ function editExtinction(extinction){
 	
 	function submitEdits(){ 
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8084/api/extinctions/' + extinction.id, true);
+	xhr.open('PUT', 'api/extinctions/' + extinction.id, true);
 	xhr.setRequestHeader("Content-type", "application/json");
 	
 	xhr.onreadystatechange = function() {
@@ -287,7 +288,6 @@ function editExtinction(extinction){
 			era: editForm.era.value,
 			area: editForm.area.value
 	};
-	console.log(newExtObject);
 	var newFilmJsonString = JSON.stringify(newExtObject);
 	xhr.send(newFilmJsonString);
 	}
