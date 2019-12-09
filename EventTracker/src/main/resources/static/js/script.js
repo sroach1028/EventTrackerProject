@@ -207,7 +207,6 @@ function displayAllExt(extinctions){
 		      if (xhr.readyState === 4 && xhr.status >= 400) {
 		         console.error(xhr.status + ': ' + xhr.responseText);
 		         h4.textContent = "No " + className + "'s Stored";
-//		         displayExt(null);
 		      }
 		   };
 		   xhr.send(null);
