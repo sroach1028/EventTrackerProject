@@ -61,6 +61,23 @@ public class ExtinctionController {
 		return extList;
 	}
 	
+	@GetMapping("extinctions/avg/{animalClass}")
+	public Integer getAvgByAnimalClass(@PathVariable String animalClass, HttpServletResponse resp) {
+		Integer classAvg = svc.findAvgByAnimalClass(animalClass);
+		System.out.println("-----------");
+		if (classAvg > 0) {
+			resp.setStatus(200);
+			System.out.println("> 0");
+		}
+		if (classAvg == 0.0) {
+			resp.setStatus(404);
+			System.out.println("0");
+		}
+		return classAvg;
+	}
+	
+	
+	
 	@PostMapping("extinctions")
 	public Extinction addExtinction(@RequestBody Extinction extinction, HttpServletRequest req, HttpServletResponse resp) {
 		try {

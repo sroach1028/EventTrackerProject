@@ -19,4 +19,6 @@ public interface ExtinctionService {
 	Extinction findByName(String name);
 
 	List<Extinction> findByKeyword(String keyword);
+
+	int findAvgByAnimalClass(String animalClass);
 }

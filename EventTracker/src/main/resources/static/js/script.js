@@ -31,7 +31,7 @@ function getExt(extId) {
 	      }
 	      if (xhr.readyState === 4 && xhr.status >= 400) {
 	         console.error(xhr.status + ': ' + xhr.responseText);
-//	         displayExt(null);
+	         displayExt(null);
 	      }
 	   };
 	   xhr.send(null);
@@ -73,20 +73,23 @@ function displayExt(extinction) {
 	  dataDiv.appendChild(block);
 	  dataDiv.appendChild(list);
 	  
-	  list.appendChild(animalClass);
-	  list.appendChild(year);
-	  list.appendChild(era);
-	  list.appendChild(area);
+//	  list.appendChild(animalClass);
+//	  list.appendChild(year);
+//	  list.appendChild(era);
+//	  list.appendChild(area);
 		if (extinction == null){
 			h1.textContent = "Extinction Not Found";
 		}
 		else {
+			  list.appendChild(animalClass);
+			  list.appendChild(year);
+			  list.appendChild(era);
+			  list.appendChild(area);
 			h1.textContent = extinction.name;
 			animalClass.textContent = extinction.animalClass;
 			year.textContent = extinction.year;
 			era.textContent = extinction.era;
 			area.textContent = extinction.area;
-		}
 		
 		dataDiv.appendChild(editButton);
 		dataDiv.appendChild(deleteButton);
@@ -105,6 +108,7 @@ function displayExt(extinction) {
 				  deleteExtinction(extId);
 			  }
 		  })
+		}
 	}
 
 function deleteExtinction(extId){
@@ -181,8 +185,36 @@ function displayAllExt(extinctions){
 		    }
 		  })
 	}
-
+	getClassAvg("Mammal");
+	getClassAvg("Bird");
+	getClassAvg("Amphibian");
+	getClassAvg("Reptile");
+	
+	//	Get AVerage Fxns
+	function getClassAvg(className){
+		let h4 = document.createElement('h4');
+		dataDiv.appendChild(h4);
+		h4.textContent = "Can't get there";
+		
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', 'http://localhost:8084/api/extinctions/avg/' + className, true);
+		xhr.setRequestHeader("Content-type", "application/json");
+		xhr.onreadystatechange = function() {
+		      if (xhr.readyState === 4 && xhr.status < 400) {
+			         var avg = JSON.parse(xhr.responseText);
+		         h4.textContent = "Average that are " + className+ ": " + avg + "%";
+		      }
+		      if (xhr.readyState === 4 && xhr.status >= 400) {
+		         console.error(xhr.status + ': ' + xhr.responseText);
+		         h4.textContent = "No " + className + "'s Stored";
+//		         displayExt(null);
+		      }
+		   };
+		   xhr.send(null);
+	}
 }
+
+
 function addNewExtinction(){
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'http://localhost:8084/api/extinctions/', true);

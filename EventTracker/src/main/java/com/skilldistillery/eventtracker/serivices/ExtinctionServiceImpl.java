@@ -75,4 +75,14 @@ public class ExtinctionServiceImpl implements ExtinctionService {
 		keyword = "%"+keyword+"%";
 		return repo.findByNameLikeOrAreaLike(keyword, keyword);
 	}
+	
+	@Override
+	public int findAvgByAnimalClass(String animalClass) {
+		double classTotal = repo.findByAnimalClassLike(animalClass).size();
+		double extTotals = repo.findAll().size();
+		System.out.println(classTotal);
+		int avg = (int) ((classTotal / extTotals) * 100);
+		System.out.println("in service" + avg);
+		return avg;
+	}
 }
