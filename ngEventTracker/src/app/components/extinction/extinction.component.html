@@ -1,0 +1,62 @@
+<h1><span>{{title}}</span></h1>
+<div *ngIf="!selected">
+<table class = "table table-striped table-hover table-danger border border-info">
+  <thead class="thead thead-dark">
+    <tr>
+      <th>Animal</th>
+      <th>Class</th>
+      <th>Year Extinct</th>
+      <th>Era</th>
+      <th>Area</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr class = "border border-info" *ngFor="let ext of extinctions">
+    <td (click)="displaySelected(ext)">{{ext.name}}</td>
+    <td>{{ext.animalClass}}</td>
+    <td>{{ext.year}}</td>
+    <td>{{ext.era}}</td>
+    <td>{{ext.area}}</td>
+  </tr>
+  </tbody>
+  </table>
+</div><br>
+<div *ngIf="!selected">
+  <h3>Add New Extinction</h3>
+  <form #createForm = "ngForm">
+    <div class = "form-group container-fluid">
+        <input type="text" name="name"class="form-control" placeholder="Animal Name" ngModel>
+        <input type="text" name="animalClass"class="form-control" placeholder="Class ex. Mammal" ngModel>
+        <input type="text" name="year" class="form-control" placeholder="Year Extinct" ngModel>
+        <input type="text" name="era" class="form-control" placeholder="Era ex. BC" ngModel>
+        <input type="text" name="area" class="form-control" placeholder="Area Roamed" ngModel>
+        <input type="submit" name="submit" class = "btn btn-primary" value = "CREATE" (click)="createExt(createForm)">
+    </div>
+  </form>
+</div>
+<div *ngIf="selected">
+    <table class = "table table-striped table-hover table-danger border border-info">
+        <thead class="thead thead-dark">
+          <tr>
+            <th>Animal</th>
+            <th>Class</th>
+            <th>Year Extinct</th>
+            <th>Era</th>
+            <th>Area</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr class = "border border-info">
+                <td>{{selected.name}}</td>
+                <td>{{selected.animalClass}}</td>
+                <td>{{selected.year}}</td>
+                <td>{{selected.era}}</td>
+                <td>{{selected.area}}</td>
+              </tr>
+              </tbody>
+              </table>
+</div>
+<div *ngIf="selected">
+  <span><button class = "btn btn-primary"(click)="reload()">Back</button></span>
+  <span><button class = "btn btn-primary"(click)="delete()">Remove</button></span>
+</div>

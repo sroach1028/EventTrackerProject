@@ -22,7 +22,6 @@ import com.skilldistillery.eventtracker.serivices.ExtinctionService;
 @RestController
 @RequestMapping("api")
 @CrossOrigin({"*", "http://localhost:4209"})
-
 public class ExtinctionController {
 
 	@Autowired
