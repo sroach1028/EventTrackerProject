@@ -17,6 +17,7 @@ export class ExtinctionComponent implements OnInit {
   extinctions = [];
   urlId: number;
   newExt: Extinction = new Extinction();
+  editExt: Extinction = null;
 
   constructor(private extSvc: ExtinctionService,
               private router: Router,
@@ -40,6 +41,9 @@ export class ExtinctionComponent implements OnInit {
       },
       err => console.error("Reload error in Component")
     );
+  }
+  setEdit(){
+    this.editExt = Object.assign({}, this.selected);
   }
 
   reload() {
@@ -71,6 +75,18 @@ export class ExtinctionComponent implements OnInit {
         console.error(bad);
       }
     );
+  }
+
+  updateExt(ext: Extinction) {
+    this.extSvc.update(ext).subscribe(
+      good => {
+        this.selected = good;
+      },
+      bad => {
+        console.error(bad);
+      }
+    );
+    this.editExt = null;
   }
 
   delete() {

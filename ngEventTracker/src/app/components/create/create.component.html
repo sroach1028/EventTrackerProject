@@ -1,4 +1,4 @@
-<div class = "card" style="width: 40rem;">
+<div class = "card mx-auto bg-success mt-5" style="width: 40rem;">
   <div class = "card-title text-center">
     <h3 class="display-4">Add New Extinction</h3>
   </div>
@@ -8,8 +8,9 @@
           <input type="text" name="animalClass"class="form-control" placeholder="Class ex. Mammal" ngModel>
           <input type="text" name="year" class="form-control" placeholder="Year Extinct" ngModel>
           <input type="text" name="era" class="form-control" placeholder="Era ex. BC" ngModel>
-          <input type="text" name="area" class="form-control" placeholder="Area Roamed" ngModel>
-          <input type="submit" name="submit" class = "btn btn-primary" value = "CREATE" (click)="createExt(createForm)">
+          <input type="text" name="area" class="form-control" placeholder="Area Roamed" ngModel><br>
+          <input type="submit" name="submit" class = "btn btn-warning" value = "CREATE" (click)="createExt(createForm)">
+          <button [routerLink]="['/extinctions']"class="float-right btn btn-danger">CANCEL</button>
       </div>
     </form>
   </div>

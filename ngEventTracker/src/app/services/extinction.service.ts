@@ -54,4 +54,15 @@ private url = this.baseUrl + 'api/extinctions/';
       );
     }
 
+    update(ext: Extinction) {
+      const httpOptions = {};
+      return this.http.put<Extinction>(this.url + ext.id, ext, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('KABOOM');
+        })
+        );
+    }
+
 }

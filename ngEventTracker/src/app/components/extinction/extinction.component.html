@@ -44,8 +44,28 @@
               </tr>
               </tbody>
               </table>
+              <div *ngIf="editExt" class="card bg-info text-light">
+              <form>
+                <div class="form-group container-fluid">
+                  <label for="animalName">Name</label>
+                  <input type="text" class="form-control" name="animalName" placeholder="Name" [(ngModel)]="editExt.name">
+                  <label for="animalClass">Class</label>
+                  <input type="text" class="form-control" name="animalClass" placeholder="Animal Class" [(ngModel)]="editExt.animalClass">
+                  <label for="year">Year</label>
+                  <input type="text" class="form-control" name="year" placeholder="Year" [(ngModel)]="editExt.year">
+                  <label for="era">Era</label>
+                  <input type="text" class="form-control" name="era" placeholder="Era" [(ngModel)]="editExt.era">
+                  <label for="area">Area</label>
+                  <input type="text" class="form-control" name="area" placeholder="Area" [(ngModel)]="editExt.area">
+                  <input (click)="updateExt(editExt)" type="submit" class="btn btn-dark" value = "SUBMIT">
+                </div>
+                </form>
+            </div>
+            <div *ngIf="!editExt">
+              <button class='btn btn-danger' (click)="setEdit()">Edit</button>
+            </div>
 </div>
-<div *ngIf="selected">
+<div *ngIf="selected && !editExt">
   <span><button class = "btn btn-primary"(click)="reload()">Back</button></span>
   <span><button class = "btn btn-primary"(click)="delete()">Remove</button></span>
 </div>
