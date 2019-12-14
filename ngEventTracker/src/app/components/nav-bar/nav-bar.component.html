@@ -1,4 +1,30 @@
-<span><a [routerLink]="['/home']"> Home |</a></span>
-<span><a [routerLink]="['/extinctions']"> See The Data |</a></span>
-<span><a [routerLink]="['/create']"> Add To Database |</a></span>
-<span><a [routerLink]="['/home']"> Home |</a></span>
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" [routerLink]="['/home']">Home<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/extinctions']">See Data</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/create']">Add to Data</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Search Data By Class
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Mammal</a>
+              <a class="dropdown-item" href="#">Bird</a>
+              <a class="dropdown-item" href="#">Reptile</a>
+              <a class="dropdown-item" href="#">Amphibian</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>

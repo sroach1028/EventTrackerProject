@@ -1,1 +1,13 @@
-<p>create works!</p>
+<div class = "container-fluid">
+    <h3>Add New Extinction</h3>
+    <form #createForm = "ngForm">
+      <div class = "form-group container-fluid">
+          <input type="text" name="name"class="form-control" placeholder="Animal Name" ngModel>
+          <input type="text" name="animalClass"class="form-control" placeholder="Class ex. Mammal" ngModel>
+          <input type="text" name="year" class="form-control" placeholder="Year Extinct" ngModel>
+          <input type="text" name="era" class="form-control" placeholder="Era ex. BC" ngModel>
+          <input type="text" name="area" class="form-control" placeholder="Area Roamed" ngModel>
+          <input type="submit" name="submit" class = "btn btn-primary" value = "CREATE" (click)="createExt(createForm)">
+      </div>
+    </form>
+  </div>

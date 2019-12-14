@@ -25,9 +25,11 @@ This program uses RESTful web services that allow clients to retrieve and manage
 
 -------delete Extinction even corresponding to the given id
 
+The front end is
+
 ## Technologies
 
-Spring REST services, Spring Boot, JSON, Java, Eclipse, Git, GitHub, Postman, MySql, MySqlWorkbench, Atom
+Spring REST services, Spring Boot, Angular, VS-Code, Java, JSON, Eclipse, Git, GitHub, Postman, MySql, MySqlWorkbench, Atom, HTML, CSS
 
 ## Lessons Learned
 
