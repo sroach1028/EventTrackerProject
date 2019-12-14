@@ -1,0 +1,25 @@
+<span *ngFor="let animClass of classes">
+  <span (click)=setSelected(animClass)>{{animClass}} |</span>
+</span>
+<div *ngIf="selected" >
+  <table class = "table table-striped table-hover table-danger border border-info">
+    <thead class="thead thead-dark">
+      <tr>
+        <th>Animal</th>
+        <th>Class</th>
+        <th>Year Extinct</th>
+        <th>Era</th>
+        <th>Area</th>
+      </tr>
+    </thead>
+    <tbody>
+          <tr #data class = "border border-info" *ngFor="let ext of extinctions | searchClass: selected">
+            <td >{{ext.name}}</td>
+            <td>{{ext.animalClass}}</td>
+            <td>{{ext.year}}</td>
+            <td>{{ext.era}}</td>
+            <td>{{ext.area}}</td>
+          </tr>
+          </tbody>
+          </table>
+  </div>

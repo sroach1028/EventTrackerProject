@@ -54,6 +54,4 @@ private url = this.baseUrl + 'api/extinctions/';
       );
     }
 
-
-
 }

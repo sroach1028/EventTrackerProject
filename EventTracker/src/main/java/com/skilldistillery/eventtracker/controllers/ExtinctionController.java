@@ -75,8 +75,6 @@ public class ExtinctionController {
 		return classAvg;
 	}
 	
-	
-	
 	@PostMapping("extinctions")
 	public Extinction addExtinction(@RequestBody Extinction extinction, HttpServletRequest req, HttpServletResponse resp) {
 		try {

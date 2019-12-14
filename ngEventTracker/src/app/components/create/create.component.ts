@@ -11,14 +11,12 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class CreateComponent implements OnInit {
 newExt: Extinction = new Extinction();
-
-  constructor(private extSvc: ExtinctionService, private router: Router
-
-    ) { }
+extinctions: Extinction [];
+  constructor(private extSvc: ExtinctionService, private router: Router) { }
 
   ngOnInit() {
-
   }
+
 
   createExt(form: NgForm) {
     this.newExt = form.value;

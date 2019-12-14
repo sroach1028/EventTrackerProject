@@ -9,6 +9,8 @@ import { ExtinctionComponent } from './components/extinction/extinction.componen
 import { CreateComponent } from './components/create/create.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { SearchComponent } from './components/search/search.component';
+import { SearchClassPipe } from './pipes/search-class.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     ExtinctionComponent,
     CreateComponent,
     HomeComponent,
-    NavBarComponent
+    NavBarComponent,
+    SearchComponent,
+    SearchClassPipe
   ],
   imports: [
     BrowserModule,
