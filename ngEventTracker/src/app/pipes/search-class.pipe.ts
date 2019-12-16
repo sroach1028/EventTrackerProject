@@ -9,7 +9,9 @@ export class SearchClassPipe implements PipeTransform {
   transform(extinctions: Extinction[], animClass: string): Extinction[] {
     const results = [];
     extinctions.forEach((ext) => {
-      if (ext.animalClass === animClass){
+      if (ext.animalClass === animClass) {
+        results.push(ext);
+      } else if (animClass === 'all') {
         results.push(ext);
       }
     });

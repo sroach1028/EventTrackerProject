@@ -16,7 +16,9 @@ export class SearchComponent implements OnInit {
 classes = ['Mammal','Reptile','Bird','Amphibian'];
 urlId: number;
 selected = null;
+selectedExt = null;
 extinctions: Extinction[];
+editExt: Extinction;
 
   constructor(
     private extSvc: ExtinctionService,
@@ -30,7 +32,28 @@ extinctions: Extinction[];
         this.extinctions = data;
           });
 }
-  setSelected(animClass){
+  setSelected(animClass) {
     this.selected = animClass;
+    this.selectedExt = null;
+  }
+
+  setEdit() {
+    this.editExt = this.selectedExt;
+  }
+
+  displaySelected(ext: Extinction){
+    this.selectedExt = ext;
+  }
+
+  updateExt(ext: Extinction) {
+    this.extSvc.update(ext).subscribe(
+      good => {
+        this.selectedExt = null;
+      },
+      bad => {
+        console.error(bad);
+      }
+    );
+    this.editExt = null;
   }
 }

@@ -1,21 +1,36 @@
-    <nav class="navbar navbar-expand-lg navbar-light bg-info">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" [routerLink]="['/home']">Home<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/extinctions']">See Data</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/create']">Add to Data</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/search']">Custom Search</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+
+<nav class="navbar navbar-expand-lg navbar-expand-md navbar-light bg-info">
+
+        <a class="navbar-brand text-white" href="/home">Home</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+
+                data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+
+                aria-expanded="false" aria-label="Toggle navigation"
+
+                (click)="isCollapsed = !isCollapsed"
+
+                [attr.aria-expanded]="!isCollapsed">
+
+         <span class="navbar-toggler-icon"></span>
+
+         </button>
+
+       <div class="collapse navbar-collapse" id="navbarNavAltMarkup"
+
+            [ngbCollapse]='isCollapsed'>
+
+         <div class="navbar-nav">
+
+           <a class="nav-item nav-link text-warning" [routerLink]="['/extinctions']">See All</a>
+
+           <a class="nav-item nav-link text-warning" [routerLink]="['/create']">Create</a>
+
+           <a class="nav-item nav-link text-warning" [routerLink]="['/search']">Advanced Search</a>
+
+         </div>
+
+       </div>
+
+      </nav>

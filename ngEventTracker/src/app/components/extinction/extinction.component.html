@@ -1,4 +1,4 @@
-<h1><span>{{title}}<h6>(select for more details)</h6>
+<h1 class="text-white"><span>{{title}}<h6>(select for more details)</h6>
 </span></h1>
 <div *ngIf="!selected">
 <table class = "table table-striped table-hover table-danger border border-info">
@@ -58,11 +58,12 @@
                   <label for="area">Area</label>
                   <input type="text" class="form-control" name="area" placeholder="Area" [(ngModel)]="editExt.area">
                   <input (click)="updateExt(editExt)" type="submit" class="btn btn-dark" value = "SUBMIT">
+                  <button (click)="setEdit()" class="btn btn-danger">CANCEL</button>
                 </div>
                 </form>
             </div>
-            <div *ngIf="!editExt">
-              <button class='btn btn-danger' (click)="setEdit()">Edit</button>
+            <div *ngIf="!editExt" class = "float-right">
+              <button class='btn btn-danger' (click)="setEdit(selected)">Edit</button>
             </div>
 </div>
 <div *ngIf="selected && !editExt">

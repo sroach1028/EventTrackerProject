@@ -42,8 +42,8 @@ export class ExtinctionComponent implements OnInit {
       err => console.error("Reload error in Component")
     );
   }
-  setEdit(){
-    this.editExt = Object.assign({}, this.selected);
+  setEdit(ext: any) {
+    this.editExt = ext;
   }
 
   reload() {

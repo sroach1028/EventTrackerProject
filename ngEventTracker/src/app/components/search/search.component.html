@@ -1,7 +1,21 @@
+<div style="opacity: 0.6" class ="text-white">
+<div class= "jumbotron jumbotron-fluid bg-secondary text-white">
+<span (click)="setSelected('all')">
+  All |
+</span>
 <span *ngFor="let animClass of classes">
   <span (click)=setSelected(animClass)>{{animClass}} |</span>
 </span>
-<div *ngIf="selected" >
+</div>
+<div class="float-right"s>
+  <span>
+    BC|
+  </span>
+  <span>
+    AD
+  </span>
+</div>
+<div *ngIf="selected && !selectedExt" >
   <table class = "table table-striped table-hover table-danger border border-info">
     <thead class="thead thead-dark">
       <tr>
@@ -14,7 +28,7 @@
     </thead>
     <tbody>
           <tr #data class = "border border-info" *ngFor="let ext of extinctions | searchClass: selected">
-            <td >{{ext.name}}</td>
+            <td (click)="displaySelected(ext)">{{ext.name}}</td>
             <td>{{ext.animalClass}}</td>
             <td>{{ext.year}}</td>
             <td>{{ext.era}}</td>
@@ -23,3 +37,46 @@
           </tbody>
           </table>
   </div>
+  <div *ngIf="selectedExt">
+      <table class = "table table-striped table-hover table-danger border border-info">
+          <thead class="thead thead-dark">
+            <tr>
+              <th>Animal</th>
+              <th>Class</th>
+              <th>Year Extinct</th>
+              <th>Era</th>
+              <th>Area</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr class = "border border-info">
+                  <td>{{selectedExt.name}}</td>
+                  <td>{{selectedExt.animalClass}}</td>
+                  <td>{{selectedExt.year}}</td>
+                  <td>{{selectedExt.era}}</td>
+                  <td>{{selectedExt.area}}</td>
+                </tr>
+                </tbody>
+                </table>
+                <div *ngIf="editExt" class="card bg-info text-light">
+                <form>
+                  <div class="form-group container-fluid">
+                    <label for="animalName">Name</label>
+                    <input type="text" class="form-control" name="animalName" placeholder="Name" [(ngModel)]="editExt.name">
+                    <label for="animalClass">Class</label>
+                    <input type="text" class="form-control" name="animalClass" placeholder="Animal Class" [(ngModel)]="editExt.animalClass">
+                    <label for="year">Year</label>
+                    <input type="text" class="form-control" name="year" placeholder="Year" [(ngModel)]="editExt.year">
+                    <label for="era">Era</label>
+                    <input type="text" class="form-control" name="era" placeholder="Era" [(ngModel)]="editExt.era">
+                    <label for="area">Area</label>
+                    <input type="text" class="form-control" name="area" placeholder="Area" [(ngModel)]="editExt.area">
+                    <input (click)="updateExt(editExt)" type="submit" class="btn btn-dark" value = "SUBMIT">
+                  </div>
+                  </form>
+              </div>
+              <div *ngIf="!editExt">
+                <button class='btn btn-danger' (click)="setEdit()">Edit</button>
+              </div>
+  </div>
+</div>
