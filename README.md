@@ -25,11 +25,11 @@ This program uses RESTful web services that allow clients to retrieve and manage
 
 -------delete Extinction even corresponding to the given id
 
-The front end is
+The front-end is an application that allows a user to query the MySql database for information about various 'Animal Extinctions' throughout history. The application allows for full CRUD operations.  
 
 ## Technologies
 
-Spring REST services, Spring Boot, Angular, VS-Code, Java, JSON, Eclipse, Git, GitHub, Postman, MySql, MySqlWorkbench, Atom, HTML, CSS
+Spring REST services, Spring Boot, Angular, Java, VS-Code, JSON, Eclipse, Git, GitHub, Postman, MySql, MySqlWorkbench, Atom, HTML, CSS
 
 ## Lessons Learned
 
